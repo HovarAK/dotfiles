@@ -1,0 +1,53 @@
+Hyprland Cheat Sheet
+
+CORE
+  Super+R            Launcher (fuzzel)
+  Super+Shift+R      Reload Hyprland
+  Super+Q            Terminal (kitty)
+  Super+L            Lock
+
+APPS
+  Super+B            Zen Browser
+  Super+Shift+B      Private Browser
+  Super+T            Neovim (quick)
+  Super+N            Obsidian
+  Super+D            Discord
+  Super+G            Steam
+
+FILES
+  Super+E            nnn (TUI)
+  Super+Shift+E      Thunar (GUI)
+
+WINDOWS
+  Super+C            Close
+  Super+V            Toggle floating
+  Super+F            Fullscreen
+  Super+Shift+M      Exit Hyprland
+  Super+P            Pseudotile
+  Super+J            Toggle split
+  Super+W            Toggle Waybar
+
+SCRATCHPAD
+  Super+Space        Toggle special:magic
+  Super+Shift+Space  Move window to special:magic
+
+NOTIFS
+  Super+Y            Toggle notifications
+  Super+Shift+Y      Toggle DND
+
+SCREENSHOTS
+  Super+S            Region screenshot
+  Print              Region screenshot
+  Super+Print        Output screenshot
+
+WORKSPACES
+  Super+1..0         Go to ws 1..10
+  Super+Shift+1..0   Move window to ws 1..10
+  Ctrl+Shift+1       ws1 + Zen
+  Alt+Shift+1        ws1 + Launcher
+  Ctrl+Shift+2       ws2 + Obsidian
+  Alt+Shift+2        ws2 + Zen
+  Ctrl+Shift+3       ws3 + Neovim (dev)
+  Alt+Shift+3        ws3 + Podman helper
+  Ctrl+Shift+4       ws4 + Discord
+  Ctrl+Shift+5       ws5 + Steam

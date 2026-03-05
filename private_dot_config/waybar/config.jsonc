@@ -1,0 +1,164 @@
+//==============================================================//
+//  waybar :: config.jsonc                                      //
+//  Hyprland + swaync + launcher + tailscale + perf + clipboard //
+//==============================================================//
+
+{
+  "layer": "top",
+  "position": "top",
+  "height": 30,
+  "spacing": 6,
+
+  "modules-left": [
+    "custom/launcher",
+    "hyprland/workspaces",
+    "hyprland/window"
+  ],
+
+  "modules-center": [
+    "clock",
+    "idle_inhibitor"
+  ],
+
+  "modules-right": [
+    "custom/tailscale",
+    "group/network",
+    "group/system"
+  ],
+
+  //==================== Groups ====================//
+
+  "group/network": {
+    "orientation": "horizontal",
+    "modules": ["network"]
+  },
+
+  "group/audio": {
+    "orientation": "horizontal",
+    "modules": ["pulseaudio"]
+  },
+
+  "group/perf": {
+    "orientation": "horizontal",
+    "modules": ["temperature", "cpu", "memory"]
+  },
+
+  "group/system": {
+    "orientation": "horizontal",
+    "modules": ["tray", "custom/clipboard", "pulseaudio", "custom/notifications"]
+  },
+
+  //==================== Launcher ====================//
+
+  "custom/launcher": {
+    "format": "󰍉",                      // search icon (power user)
+    "tooltip": false,
+    "on-click": "fuzzel --prompt 'Apps'"
+  },
+
+  //==================== Hyprland ====================//
+
+  "hyprland/workspaces": {
+    "all-outputs": true,
+    "format": "{name}",
+    "disable-scroll": false,
+    "persistent-workspaces": { "*": 5 },
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1"
+  },
+
+  "hyprland/window": {
+    "max-length": 60,
+    "separate-outputs": true
+  },
+
+  //==================== Clock ====================//
+
+  "clock": {
+    "format": "󰥔  {:%a %b %d  %I:%M %p}",
+    "tooltip-format": "{:%Y-%m-%d | %H:%M:%S}"
+  },
+
+  //==================== Tailscale ====================//
+
+  "custom/tailscale": {
+    "interval": 5,
+    "return-type": "json",
+    "exec": "~/.config/waybar/scripts/tailscale-status.sh",
+    "on-click": "~/.config/waybar/scripts/tailscale-toggle.sh",
+    "on-click-right": "~/.config/waybar/scripts/tailscale-systray.sh",
+    "tooltip": true
+  },
+
+  //==================== Clipboard ====================//
+  // Requires: cliphist + wl-copy (wl-clipboard)
+  // Left click: pick an entry into clipboard
+  // Right click: clear history
+
+  "custom/clipboard": {
+    "format": "󱉧 ",
+    "tooltip": "Clipboard",
+    "on-click": "bash -lc 'cliphist list | fuzzel --dmenu --prompt \"Clipboard\" | cliphist decode | wl-copy'",
+    "on-click-right": "bash -lc 'cliphist wipe && notify-send \"Clipboard\" \"History cleared\" >/dev/null 2>&1 || true'"
+  },
+
+  //==================== Idle inhibitor ====================//
+
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "󰅶 ",   // keep-awake
+      "deactivated": "󰾪 "  // sleep/idle
+    },
+    "tooltip": true
+  },
+
+  //==================== Performance ====================//
+
+  "temperature": {
+    "format": "󰔏 {temperatureC}°",
+    "critical-threshold": 85,
+    "tooltip": true
+  },
+
+  "cpu": {
+    "format": "󰍛 {usage}%",
+    "tooltip": true
+  },
+
+  "memory": {
+    "format": "󰘚 {percentage}%",
+    "tooltip": true
+  },
+
+  //==================== Audio ====================//
+
+  "pulseaudio": {
+    "format": "{volume}% {icon}",
+    "format-muted": "󰝟 muted",
+    "format-icons": { "default": ["󰕿", "󰖀", "󰕾"] },
+    "scroll-step": 5,
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-click-right": "pavucontrol",
+    "tooltip": true
+  },
+
+  //==================== Network ====================//
+
+  "network": {
+    "format-wifi": "󰖩  {signalStrength}%",
+    "format-ethernet": "  {ipaddr}",
+    "format-disconnected": "󰖪 down",
+    "tooltip-format": "{ifname}\n{ipaddr}",
+    "on-click": "nm-connection-editor"
+  },
+
+  //==================== Notifications ====================//
+
+  "custom/notifications": {
+    "format": "󰂚",
+    "tooltip": false,
+    "on-click": "swaync-client -t",
+    "on-click-right": "swaync-client -d"
+  }
+}

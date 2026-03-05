@@ -1,0 +1,160 @@
+/*==============================================================*
+ *  waybar :: style.css                                         *
+ *  Matches config.jsonc: launcher | workspaces | window         *
+ *  center: clock + idle_inhibitor                               *
+ *  right: tailscale | group/network | group/system              *
+ *==============================================================*/
+
+/*------------------------------*
+ * GLOBAL
+ *------------------------------*/
+* {
+    font-family: "Iosevka Nerd Font", "JetBrainsMono Nerd Font", "Noto Color Emoji", monospace;
+    font-size: 12.75px;
+    border: none;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(10, 10, 10, 0.90);
+    padding: 3px 10px;
+    margin: 0;
+}
+
+/*------------------------------*
+ * WORKSPACES
+ *------------------------------*/
+#workspaces {
+padding: 0 2px;
+}
+
+#workspaces button {
+padding: 0 10px;
+margin: 0 3px;
+border-radius: 10px;
+background: transparent;
+color: rgba(235, 240, 255, 0.80);
+}
+
+#workspaces button:hover {
+background: rgba(255, 255, 255, 0.08);
+}
+
+#workspaces button.active {
+background: rgba(122, 162, 247, 0.22); /* cool blue */
+box-shadow: inset 0 0 0 1px rgba(122, 162, 247, 0.20);
+color: rgba(255, 255, 255, 0.95);
+}
+
+#workspaces button.urgent {
+background: rgba(255, 107, 129, 0.25); /* muted pink */
+box-shadow: inset 0 0 0 1px rgba(255, 107, 129, 0.22);
+color: rgba(255, 255, 255, 0.95);
+}
+
+/*------------------------------*
+ * MODULE BASE (padding/spacing)
+ *------------------------------*/
+#custom-launcher,
+#window,
+#clock,
+#idle_inhibitor,
+#custom-tailscale,
+#network,
+#tray,
+#custom-clipboard,
+#pulseaudio,
+#custom-notifications,
+#temperature,
+#cpu,
+#memory {
+padding: 0 8px;
+margin: 0 2px;
+border-radius: 10px;
+}
+
+/* Hover on clickable modules */
+#custom-launcher:hover,
+#custom-tailscale:hover,
+#custom-clipboard:hover,
+#pulseaudio:hover,
+#network:hover,
+#custom-notifications:hover,
+#idle_inhibitor:hover {
+background: rgba(255, 255, 255, 0.07);
+}
+
+/* Window title: keep it subtle */
+#window {
+color: rgba(235, 240, 255, 0.70);
+}
+
+/* Center modules slightly brighter */
+#clock {
+color: rgba(235, 240, 255, 0.92);
+}
+
+#idle_inhibitor {
+color: rgba(235, 240, 255, 0.85);
+}
+
+/*------------------------------*
+ * GROUP CONTAINERS
+ *------------------------------*/
+#group-network,
+#group-system {
+background: rgba(255, 255, 255, 0.06);
+border-radius: 12px;
+padding: 0 6px;
+margin: 0 4px;
+}
+
+/* Remove double background within groups */
+#group-network #network,
+#group-system #tray,
+#group-system #custom-clipboard,
+#group-system #pulseaudio,
+#group-system #custom-notifications {
+background: transparent;
+margin: 0 2px;
+padding: 0 6px;
+}
+
+/* Tray spacing */
+#tray {
+padding: 0 6px;
+}
+
+#tray > widget {
+margin: 0 4px;
+}
+
+/*------------------------------*
+ * STATE COLORS (tailscale classes)
+ *------------------------------*/
+#custom-tailscale.ts-up   { color: #3ddc84; }  /* green */
+#custom-tailscale.ts-down { color: #ff4d4d; }  /* red */
+#custom-tailscale.ts-warn { color: #ffb020; }  /* amber */
+
+/* Optional: idle inhibitor subtle cue */
+#idle_inhibitor.activated   { color: #ffb020; } /* awake = amber */
+#idle_inhibitor.deactivated { color: rgba(235, 240, 255, 0.75); }
+
+/*------------------------------*
+ * SYSTEM MODULE ACCENTS
+ *------------------------------*/
+
+/* Clipboard: slightly dim so it doesn't dominate */
+#custom-clipboard {
+color: rgba(235, 240, 255, 0.82);
+}
+
+/* Audio muted already shows text; just keep it clean */
+#pulseaudio {
+color: rgba(235, 240, 255, 0.90);
+}
+
+/* Network: slightly brighter for quick glance */
+#network {
+color: rgba(235, 240, 255, 0.92);
+}
