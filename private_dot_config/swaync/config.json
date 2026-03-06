@@ -1,0 +1,105 @@
+{
+  "$schema": "/etc/xdg/swaync/configSchema.json",
+
+  "positionX": "right",
+  "positionY": "top",
+  "layer": "overlay",
+  "control-center-layer": "top",
+  "layer-shell": true,
+  "cssPriority": "application",
+
+  "control-center-margin-top": 6,
+  "control-center-margin-right": 6,
+  "control-center-margin-bottom": 0,
+  "control-center-margin-left": 0,
+
+  "fit-to-screen": true,
+  "relative-timestamps": true,
+  "transition-time": 200,
+
+  "notification-2fa-action": true,
+  "notification-inline-replies": false,
+  "image-visibility": "when-available",
+
+  "notification-icon-size": 48,
+  "notification-body-image-height": 90,
+  "notification-body-image-width": 180,
+
+  "timeout": 10,
+  "timeout-low": 5,
+  "timeout-critical": 0,
+
+  "notification-window-width": 620,
+  "control-center-width": 420,
+  "control-center-height": 620,
+
+  "keyboard-shortcuts": true,
+  "hide-on-clear": false,
+  "hide-on-action": true,
+  "script-fail-notify": true,
+
+  "notification-visibility": {
+    "discord": { "state": "default", "app-name": "Discord" },
+    "discord-flatpak": { "state": "default", "app-name": "com.discordapp.Discord" },
+
+    "zen": { "state": "default", "app-name": "Zen Browser" },
+    "zen-flatpak": { "state": "default", "app-name": "io.github.zen_browser.zen" },
+
+    "steam": { "state": "default", "app-name": "Steam" },
+    "steam-flatpak": { "state": "default", "app-name": "com.valvesoftware.Steam" },
+
+    "clocks": { "state": "default", "app-name": "Clocks" },
+    "clocks-flatpak": { "state": "default", "app-name": "org.gnome.clocks" }
+  },
+
+  "rules": [
+    { "app-name": "Clocks", "urgency": "Critical", "timeout": 0 },
+    { "app-name": "org.gnome.clocks", "urgency": "Critical", "timeout": 0 },
+
+    {
+      "app-name": "Zen Browser",
+      "summary": "(?i)calendar|reminder|meeting|event",
+      "urgency": "Critical",
+      "timeout": 0
+    },
+    {
+      "app-name": "io.github.zen_browser.zen",
+      "summary": "(?i)calendar|reminder|meeting|event",
+      "urgency": "Critical",
+      "timeout": 0
+    },
+
+    { "app-name": "Discord", "urgency": "Normal", "timeout": 12 },
+    { "app-name": "com.discordapp.Discord", "urgency": "Normal", "timeout": 12 },
+
+    { "app-name": "Steam", "urgency": "Low", "timeout": 4 },
+    { "app-name": "com.valvesoftware.Steam", "urgency": "Low", "timeout": 4 }
+  ],
+
+  "widgets": [
+    "title",
+    "dnd",
+    "notifications",
+    "mpris",
+    "volume"
+  ],
+
+  "widget-config": {
+    "title": {
+      "text": "Notification Center",
+      "clear-all-button": true,
+      "button-text": "Clear All"
+    },
+    "dnd": {
+      "text": "Do Not Disturb"
+    },
+    "mpris": {
+      "image-size": 72,
+      "image-radius": 10
+    },
+    "volume": {
+      "label": "Volume",
+      "show-per-app": false
+    }
+  }
+}

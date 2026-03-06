@@ -1,0 +1,364 @@
+/*==============================================================*
+ *  swaync :: style.css (revised)                               *
+ *  Matches your waybar style + improved volume + mpris          *
+ *==============================================================*/
+
+/*------------------------------*
+ * GLOBAL
+ *------------------------------*/
+* {
+  all: unset;
+  font-family: "Iosevka Nerd Font", "JetBrainsMono Nerd Font", "Noto Color Emoji", monospace;
+  font-size: 12.75px;
+}
+
+/*------------------------------*
+ * COLOR TOKENS (match Waybar)
+ *------------------------------*/
+@define-color bg          rgba(10, 10, 10, 0.90);
+@define-color panel       rgba(10, 10, 10, 0.90);
+@define-color surface     rgba(255, 255, 255, 0.06);
+@define-color hover       rgba(255, 255, 255, 0.08);
+@define-color hover-soft  rgba(255, 255, 255, 0.07);
+@define-color border      rgba(255, 255, 255, 0.12);
+
+@define-color text        rgba(235, 240, 255, 0.92);
+@define-color text-dim    rgba(235, 240, 255, 0.70);
+@define-color text-muted  rgba(235, 240, 255, 0.82);
+
+@define-color blue-bg     rgba(122, 162, 247, 0.22);
+@define-color blue-ring   rgba(122, 162, 247, 0.20);
+@define-color pink-bg     rgba(255, 107, 129, 0.25);
+@define-color pink-ring   rgba(255, 107, 129, 0.22);
+
+@define-color red         #ff4d4d;
+@define-color amber       #ffb020;
+@define-color green       #3ddc84;
+
+/* “Compat” vars used by swaync widgets */
+@define-color cc-bg               @panel;
+@define-color noti-bg             rgba(255, 255, 255, 0.06);
+@define-color noti-bg-opaque      rgb(18, 18, 18);
+@define-color noti-bg-darker      rgba(255, 255, 255, 0.04);
+@define-color noti-bg-hover       @hover;
+@define-color noti-bg-hover-opaque rgb(26, 26, 26);
+@define-color noti-bg-focus       rgba(255, 255, 255, 0.06);
+
+@define-color noti-border-color   @border;
+
+@define-color noti-close-bg       rgba(255, 255, 255, 0.10);
+@define-color noti-close-bg-hover rgba(255, 255, 255, 0.15);
+
+@define-color text-color          @text;
+@define-color text-color-disabled rgba(235, 240, 255, 0.55);
+
+@define-color bg-selected         @blue-bg;
+@define-color noti-bg-alt         rgba(255, 255, 255, 0.05);
+
+/* Slider tokens (Waybar-like) */
+@define-color slider-track rgba(255, 255, 255, 0.10);
+@define-color slider-fill  rgba(122, 162, 247, 0.55); /* Waybar blue */
+@define-color slider-knob  rgba(235, 240, 255, 0.90);
+
+/*------------------------------*
+ * CONTROL CENTER (smaller)
+ *------------------------------*/
+.control-center {
+  background: @cc-bg;
+  color: @text-color;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: none;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Keep lists clean; don’t force size here (GTK complains) */
+.control-center .control-center-list {
+  background: transparent;
+}
+
+.control-center .control-center-list-placeholder {
+  color: @text-dim;
+  opacity: 0.75;
+}
+
+/*------------------------------*
+ * FLOATING NOTIFICATIONS
+ *------------------------------*/
+.floating-notifications {
+  background: transparent;
+}
+
+.floating-notifications .notification {
+  box-shadow: none;
+}
+
+/*------------------------------*
+ * NOTIFICATION ROW + CARD
+ *------------------------------*/
+.notification-row {
+  outline: none;
+  margin: 6px 8px;
+}
+
+.notification-row .notification-background {
+  padding: 0;
+}
+
+.notification-row .notification-background .notification {
+  background: @noti-bg;
+  border: 1px solid @noti-border-color;
+  border-radius: 12px;
+  padding: 0;
+  transition: background 0.15s ease-in-out;
+  box-shadow: none;
+}
+
+.notification-row .notification-background .notification:hover {
+  background: @noti-bg-hover;
+}
+
+.notification-row .notification-background .notification.critical {
+  background: rgba(255, 77, 77, 0.10);
+  border-color: rgba(255, 77, 77, 0.35);
+}
+
+.notification-row .notification-background .notification.low {
+  border-color: rgba(255, 255, 255, 0.10);
+}
+
+.notification-row .notification-background .notification .notification-default-action,
+.notification-row .notification-background .notification .notification-action {
+  padding: 6px;
+  margin: 0;
+  background: transparent;
+  border: none;
+  color: @text-color;
+  transition: background 0.15s ease-in-out;
+}
+
+.notification-row .notification-background .notification .notification-default-action {
+  border-radius: 12px;
+}
+
+.notification-row .notification-background .notification .notification-default-action:hover,
+.notification-row .notification-background .notification .notification-action:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.notification-row .notification-background .notification .notification-default-action:not(:only-child) {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content {
+  padding: 6px;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .app-icon {
+  margin: 6px;
+  -gtk-icon-effect: none;
+  -gtk-icon-shadow: none;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .image {
+  margin: 6px;
+  border-radius: 10px;
+  -gtk-icon-effect: none;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .summary {
+  font-size: 13px;
+  font-weight: 700;
+  color: @text;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .time {
+  font-size: 12px;
+  font-weight: 600;
+  color: @text-dim;
+  margin-right: 28px;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .body {
+  font-size: 12.75px;
+  font-weight: 400;
+  color: @text-muted;
+}
+
+.notification-row .notification-background .close-button {
+  background: @noti-close-bg;
+  color: @text-color;
+  border-radius: 999px;
+  margin-top: 6px;
+  margin-right: 6px;
+  min-width: 24px;
+  min-height: 24px;
+  border: none;
+  box-shadow: none;
+}
+
+.notification-row .notification-background .close-button:hover {
+  background: @noti-close-bg-hover;
+}
+
+.notification-row .notification-background .notification .notification-action {
+  border-top: 1px solid rgba(255, 255, 255, 0.10);
+  border-right: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 0;
+}
+
+.notification-row .notification-background .notification .notification-action:first-child {
+  border-bottom-left-radius: 12px;
+}
+
+.notification-row .notification-background .notification .notification-action:last-child {
+  border-bottom-right-radius: 12px;
+  border-right: none;
+}
+
+/*------------------------------*
+ * WIDGET TITLES + DND
+ *------------------------------*/
+.widget-title {
+  color: @text;
+  margin: 6px 8px 8px 8px;
+  font-size: 1.15rem;
+}
+
+.widget-title > button {
+  color: @text;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 10px;
+  padding: 6px 10px;
+}
+
+.widget-title > button:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.widget-dnd {
+  color: @text;
+  margin: 6px 8px;
+  font-size: 1.05rem;
+}
+
+.widget-dnd > switch {
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: none;
+  padding: 2px;
+}
+
+.widget-dnd > switch:checked {
+  background: @blue-bg;
+  box-shadow: inset 0 0 0 1px @blue-ring;
+}
+
+.widget-dnd > switch slider {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+}
+
+/*------------------------------*
+ * VOLUME WIDGET (Waybar-like slider)
+ *------------------------------*/
+.widget-volume {
+  margin: 8px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+/* Hide extra buttons if present */
+.widget-volume > box > button {
+  background: transparent;
+  border: none;
+}
+
+/* The slider itself */
+.widget-volume scale {
+  padding: 0;
+  margin: 2px 0 0 0;
+}
+
+/* Track */
+.widget-volume scale trough {
+  min-height: 8px;
+  border-radius: 999px;
+  background: @slider-track;
+}
+
+/* Filled portion */
+.widget-volume scale trough highlight {
+  min-height: 8px;
+  border-radius: 999px;
+  background: @slider-fill;
+}
+
+/* Knob */
+.widget-volume scale slider {
+  min-width: 14px;
+  min-height: 14px;
+  border-radius: 999px;
+  background: @slider-knob;
+  box-shadow: 0 0 0 2px rgba(10,10,10,0.70);
+}
+
+/* Optional per-app volume container (if you ever enable it) */
+.per-app-volume {
+  background-color: @noti-bg-alt;
+  padding: 6px 10px;
+  margin: 0 8px 8px 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+/*------------------------------*
+ * MPRIS (improved visual)
+ *------------------------------*/
+@define-color mpris-button-hover rgba(255, 255, 255, 0.08);
+
+.widget-mpris .widget-mpris-player {
+  margin: 8px;
+  padding: 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+/* Make the album art feel “carded” */
+.widget-mpris .widget-mpris-player .widget-mpris-album-art {
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+/* Typography: clearer hierarchy */
+.widget-mpris .widget-mpris-player .widget-mpris-title {
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: @text;
+}
+
+.widget-mpris .widget-mpris-player .widget-mpris-subtitle {
+  font-size: 0.95rem;
+  color: @text-dim;
+}
+
+/* Buttons: pill hover, consistent */
+.widget-mpris .widget-mpris-player button {
+  border-radius: 10px;
+  padding: 6px;
+}
+
+.widget-mpris .widget-mpris-player button:hover {
+  background: @mpris-button-hover;
+}
+
+/* Side buttons (prev/next) can be a touch dimmer */
+.widget-mpris .widget-mpris-player button:disabled {
+  opacity: 0.35;
+}
